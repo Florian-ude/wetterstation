@@ -1,44 +1,47 @@
 <?php
+
 $title = "Wetterstation";
 $weather = array();
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "https://api.darksky.net/forecast/ddbbda839547d119eeeff74ca6fccedf/51.4556432,7.0115552");
+curl_setopt($ch, CURLOPT_URL, "https://api.darksky.net/forecast/ddbbda839547d119eeeff74ca6fccedf/51.4556432,7.0115552?lang=de");
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-$output = curl_exec($ch);
-
+$weather = curl_exec($ch);
+$weather = json_decode($weather,true);
 curl_close($ch);
-var_dump($output);
+$temperature = ($weather["currently"]["temperature"]-32)*5/9;
+$temperature = round($temperature,2)
 ?>
 <!doctype html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
 
-  <title><?php echo $title; ?></title>
-  </head>
-  <body>
-      <h1><?php echo $title; ?></h1>
-      <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Essen</h5>
-              <p class="card-text">Bewölkt</p>
-          </div>
-      </div>
+<title><?php echo $title; ?></title>
+</head>
+<body>
+    <div class="container">
+        <h1><?php echo $title; ?></h1>
+        <div class="row">
+            <div class="col-md-4 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Essen</h5>
+                        <p class="card-text"><?php echo $weather["currently"]["summary"]?></p>
+                        <p class="card-text"><?php echo $temperature."°C" ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-      <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Essen</h5>
-              <p class="card-text">Bewölkt</p>
-          </div>
-      </div>
     <script src="jquery-3.4.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  </body>
+</body>
 </html>
