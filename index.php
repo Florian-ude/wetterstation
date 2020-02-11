@@ -1,27 +1,17 @@
 <?php
-
 $title = "Wetterstation";
-$weather = array();
 
-$ch = curl_init();
+require_once 'location.class.php';
 
-curl_setopt($ch, CURLOPT_URL, "https://api.darksky.net/forecast/ddbbda839547d119eeeff74ca6fccedf/51.4556432,7.0115552?lang=de&units=si");
+$essen = new Location('Essen', '51.4556432', '7.0115552');
+$bochum = new Location('Bochum', '51.4556432', '7.0115552');
 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$locations = array($essen, $bochum);
 
-$weather = curl_exec($ch);
-$weather = json_decode($weather,true);
-curl_close($ch);
-$temperature = round($weather["currently"]["temperature"],2);
-
-
-class Location
-{
-    protected $name ;
-    $letitude;
-    $longitude;
-}
-
+//echo '<pre>';
+//var_dump($essen);
+//var_dump($bochum);
+//echo '</pre>';
 
 
 ?>
@@ -39,16 +29,23 @@ class Location
     <div class="container">
         <h1><?php echo $title; ?></h1>
         <div class="card-deck">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title"><i class="fas fa-map-marker"></i> Essen</h5>
-                    <p class="card-text"><?php echo $weather["currently"]["summary"]?></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Temperatur: <?php echo $temperature . "°C" ?></li>
-                    <li class="list-group-item">Wind: <?php echo $temperature . "°C" ?></li>
-                </ul>
-            </div>
+            <?php
+            foreach ($locations as $location)
+            {
+                echo '
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-map-marker"></i> ' . $location->getName() . '</h5>
+                            <p class="card-text"><?php ?></p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temperatur:  ' . $location->getTemperature() . ' °C</li>
+                            <li class="list-group-item">Wind: ' . $location->getWindSpeed() . ' km/h</li>
+                        </ul>
+                    </div>
+                ';
+            }
+            ?>
         </div>
     </div>
 
