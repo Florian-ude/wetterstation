@@ -24,13 +24,20 @@ var_dump($output);
   <title><?php echo $title; ?></title>
   </head>
   <body>
-  <h1><?php echo $title; ?></h1>
-  <div class="card">
-      <div class="card-body">
-          <h5 class="card-title">Essen</h5>
-          <p class="card-text">Bewölkt</p>
+      <h1><?php echo $title; ?></h1>
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Essen</h5>
+              <p class="card-text">Bewölkt</p>
+          </div>
       </div>
-  </div>
+
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Essen</h5>
+              <p class="card-text">Bewölkt</p>
+          </div>
+      </div>
     <script src="jquery-3.4.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
