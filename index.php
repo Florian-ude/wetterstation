@@ -5,15 +5,25 @@ $weather = array();
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "https://api.darksky.net/forecast/ddbbda839547d119eeeff74ca6fccedf/51.4556432,7.0115552?lang=de");
+curl_setopt($ch, CURLOPT_URL, "https://api.darksky.net/forecast/ddbbda839547d119eeeff74ca6fccedf/51.4556432,7.0115552?lang=de&units=si");
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 $weather = curl_exec($ch);
 $weather = json_decode($weather,true);
 curl_close($ch);
-$temperature = ($weather["currently"]["temperature"]-32)*5/9;
-$temperature = round($temperature,2)
+$temperature = round($weather["currently"]["temperature"],2);
+
+
+class Location
+{
+    protected $name ;
+    $letitude;
+    $longitude;
+}
+
+
+
 ?>
 <!doctype html>
 <html lang="de">
