@@ -18,25 +18,26 @@ $temperature = round($temperature,2)
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="style.css">
-
-<title><?php echo $title; ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="fontawesome/js/all.js"></script>
+    <title><?php echo $title; ?></title>
 </head>
 <body>
     <div class="container">
         <h1><?php echo $title; ?></h1>
-        <div class="row">
-            <div class="col-md-4 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Essen</h5>
-                        <p class="card-text"><?php echo $weather["currently"]["summary"]?></p>
-                        <p class="card-text"><?php echo $temperature."°C" ?></p>
-                    </div>
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-map-marker"></i> Essen</h5>
+                    <p class="card-text"><?php echo $weather["currently"]["summary"]?></p>
                 </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Temperatur: <?php echo $temperature . "°C" ?></li>
+                    <li class="list-group-item">Wind: <?php echo $temperature . "°C" ?></li>
+                </ul>
             </div>
         </div>
     </div>
