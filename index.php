@@ -3,16 +3,16 @@ $title = "Wetterstation";
 
 require_once 'location.class.php';
 
-$essen = new Location('Essen', '51.4556432', '7.0115552');
-$bochum = new Location('Bochum', '51.4556432', '7.0115552');
+$mysqli = new mysqli('127.0.0.1', 'root', 'root', 'wetterstation');
+$sql = "SELECT * FROM stadt";
+$result = $mysqli->query($sql);
 
-$locations = array($essen, $bochum);
+$locations = array();
 
-//echo '<pre>';
-//var_dump($essen);
-//var_dump($bochum);
-//echo '</pre>';
-
+while ($stadt = $result->fetch_assoc())
+{
+    $locations[] = new Location($stadt["name"], $stadt["latitude"], $stadt["longitude"]);
+}
 
 ?>
 <!doctype html>
